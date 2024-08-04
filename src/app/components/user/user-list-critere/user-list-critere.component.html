@@ -1,0 +1,228 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Liste des Utilisateur</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">liste utilisateur</li>
+            
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <section class="content">
+  
+    <div class="container-fluid">        
+
+    <div class="card">
+       
+    <div class="card-header">
+    
+        
+        <div class="bg-white border border-4 rounded-lg shadow relative m-1">
+
+            <!--<div class="flex items-start justify-between p-5 border-b rounded-t">
+                <h3 class="text-xl font-semibold">
+                    Ajouter utilisateur       </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="product-modal">
+                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div> -->
+        
+            <div class="p-6 space-y-6">
+                <form  [formGroup]="registerForm" (ngSubmit)="RechUsers()">
+        
+                    <div class="grid grid-cols-6 gap-6 mb-3">
+                        
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="product-name" class="text-sm font-medium text-gray-900 block mb-2">Utilisateur</label>
+                            <input type="text" formControlName="usersPkId" class="form-control" placeholder="Nom utilisateur">
+                          
+                        </div>
+        
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="brand" class="text-sm font-medium text-gray-900 block mb-2">wilaya</label>
+                            <select class="form-control"  formControlName="usersStStructure"  aria-label="Default select example" placeholder="wilaya" >
+                              <option
+                                *ngFor="let option of wilayas"
+                                [value]="option.wilayaStLibelleFr">
+                                {{ option.wilayaStLibelleFr}}
+                              </option>
+                            </select>
+                            
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="product-name" class="text-sm font-medium text-gray-900 block mb-2">Profile</label>
+                            <select class="form-control" aria-label="Default select example" formControlName="usersStFonction" >
+                                <option value=""></option>
+                                <option value="Administrateur">Administrateur</option>  
+                                <option value="utilisateur">utilisateur</option>                               
+                            </select>
+                          
+                        </div>
+        
+                        <div class="col-span-6 sm:col-span-3">                
+                          <label for="brand" class="text-sm font-medium text-gray-900 block mb-2">Etat compte</label>
+                          <select class="form-control" aria-label="Default select example" formControlName="usersInEtatCompte" >
+                              <option value="1">Marche</option>
+                              <option value="2">Arret</option>                                 
+                          </select>
+                        
+                        </div>
+                        
+                        
+                        
+                    </div>
+        
+                    <div class="mb-3">
+
+                      <button mat-raised-button color="primary"
+                      matBadge="{{total}}" matBadgePosition="after" 
+                      matBadgeColor="accent" class="mr-3"> 
+                      Recherche
+                      </button> 
+
+                      <!--<button mat-raised-button color="Default" (click)="NouvelleRech()"> 
+                        Nouvelle Recherche
+                      </button> -->
+                      
+                      <!--<button class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3" type="submit">Recherche</button>-->
+                                   
+                      <button class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button" (click)="NouvelleRech()">Nouvelle Recherche</button>
+                                           
+                      
+                    </div>
+
+                    <div class="border-t border-gray-200 rounded-b">
+
+                      <div *ngIf="affichersuccesmessage" class="alert alert-success" role="alert">
+                        succes !
+                      </div>
+                      
+                      <div *ngIf="afficheralertmessage" class="alert alert-danger" role="alert">
+                        aucun user trouves !
+                      </div>
+                      
+                    
+                    </div>
+                    
+                </form>       
+                
+        
+            </div>
+        
+            
+        
+        </div>
+    
+    
+    
+    </div>
+        <div class="card-body">
+            <div class="bg-white border border-4 rounded-lg shadow relative m-1">
+                
+              <!--<div class="m-3">
+              <button mat-raised-button color="warn" class="float-right"  (click)="openDialogue()" >Ajouter</button>
+                <button mat-raised-button color="green" class="float-right mr-3"  (click)="PrintListe();">imprimer</button>
+              </div>-->
+              <!--<mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+              </mat-form-field>-->
+              
+              <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort>
+              
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="usersPkId">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> User </th>
+                    <td mat-cell *matCellDef="let row"> {{row.usersPkId}} </td>
+                  </ng-container>
+              
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="usersStPassword">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> passe </th>
+                    <td mat-cell *matCellDef="let row"> {{row.usersStPassword}}</td>
+                  </ng-container>
+              
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="usersStStructure">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> structure </th>
+                    <td mat-cell *matCellDef="let row"> {{row.usersStStructure}} </td>
+                  </ng-container>
+              
+                  <!-- Fruit Column -->
+                  <ng-container matColumnDef="usersStFonction">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> fonction </th>
+                    <td mat-cell *matCellDef="let row"> {{row.usersStFonction}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="usersInEtatCompte">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Etat </th>
+                    <td mat-cell *matCellDef="let row"> 
+                        <label *ngIf="(row.usersInEtatCompte)==0">Arret</label>
+                        <label *ngIf="(row.usersInEtatCompte)==1">Marche</label>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="usersStImageName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> image </th>
+                    <td mat-cell *matCellDef="let row"> <img width="30px" height="30px" [src]="imageUrl + row.usersStImageName" /></td> <!--{{row.usersStImageName}}-->
+                  </ng-container>
+
+                  <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> action </th>
+                    <td mat-cell *matCellDef="let row"> 
+
+                    
+                        
+                    <button mat-icon-button color="primary" (click)="EditUser(row)">
+
+                        <mat-icon>edit</mat-icon>    
+
+                    </button>
+
+                    <button mat-icon-button color="warn" (click)="DeleteUsers(row.usersPkId)">
+
+                        <mat-icon>delete</mat-icon>    
+
+                    </button>
+                    
+                    </td>
+                  </ng-container>
+              
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                  <!-- Row shown when there is no matching data. -->
+                  <!--<tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                  </tr>-->
+                </table>
+              
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+              </div>
+            </div>
+        </div>
+        <div class="card-footer"></div>
+    </div>
+
+    <!--<p *ngIf="!users || users.length <=0 ">pas d'Utilisateur!</p>-->
+   
+
+    </div>
+  </section>
+
+
+  
+
+  
+
+
+  

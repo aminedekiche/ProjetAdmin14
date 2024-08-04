@@ -1,0 +1,132 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Ajouter utilisateur</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Ajouter utilisateur</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <section class="content">
+  
+    <div class="container-fluid">
+
+<div class="bg-white border border-4 rounded-lg shadow relative m-1">
+
+    <!--<div class="flex items-start justify-between p-5 border-b rounded-t">
+        <h3 class="text-xl font-semibold">
+            Ajouter utilisateur       </h3>
+        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="product-modal">
+           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div> -->
+
+    <div class="p-6 space-y-6">
+        <form  [formGroup]="registerForm" (ngSubmit)="addUsers()">
+
+            <div class="grid grid-cols-6 gap-6 mb-3">
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="product-name" class="text-sm font-medium text-gray-900 block mb-2">Utilisateur</label>
+                    <input type="text" formControlName="usersPkId" class="form-control" [ngClass]="{'is-invalid':submited && registerForm.controls.usersPkId.errors}" [(ngModel)]="addusersRequest.usersPkId" placeholder="Nom utilisateur" required>
+                    <div *ngIf="submited && registerForm.controls.usersPkId.invalid"
+                    class="text text-danger">
+                      <div *ngIf="submited && registerForm.controls.usersPkId.errors?.['required']">
+                        Le usersPkId est requis.
+                      </div>
+                      <div *ngIf="submited && registerForm.controls.usersPkId.errors?.['minlength']">
+                        Le nom doit comporter au moins 4 caractères.
+                      </div>
+                      
+                    </div>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="category" class="text-sm font-medium text-gray-900 block mb-2">Mot de passe</label>
+                    <input type="text" formControlName="usersStPassword" class="form-control" [ngClass]="{'is-invalid':submited && registerForm.controls.usersStPassword.errors}" [(ngModel)]="addusersRequest.usersStPassword"  placeholder="mot de passe" required>                                  
+                                      <div *ngIf="submited && registerForm.controls.usersStPassword.invalid"
+                                      class="text text-danger">
+                                        <div *ngIf="submited && registerForm.controls.usersStPassword.errors?.['required']">
+                                          Le mot de passe est requis.
+                                        </div>
+                                        <div *ngIf="submited && registerForm.controls.usersStPassword.errors?.['minlength']">
+                                          Le nom doit comporter au moins 8 caractères.
+                                        </div>
+                                        
+                                      </div>
+                  </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="brand" class="text-sm font-medium text-gray-900 block mb-2">wilaya</label>
+                    <select class="form-control"  formControlName="usersStStructure"  [ngClass]="{'is-invalid':submited && registerForm.controls.usersStStructure.errors}" [(ngModel)]="addusersRequest.usersStStructure"  placeholder="wilaya" required>
+                      <option
+                        *ngFor="let option of wilayas"
+                        [value]="option.wilayaStLibelleFr"
+                        [selected]="option.wilayaStLibelleFr === selectedwilaya">
+                        {{ option.wilayaStLibelleFr}}
+                      </option>
+                    </select>
+                    
+                    <div *ngIf="submited && registerForm.controls.usersStStructure.invalid"
+                      class="text text-danger">
+                      <div *ngIf="submited && registerForm.controls.usersStStructure.errors?.['required']">
+                        la wilaya est requis.
+                      </div>                      
+                    </div>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">                
+                  <label for="brand" class="text-sm font-medium text-gray-900 block mb-2">Etat compte</label>
+                  <select class="form-control" aria-label="Default select example" formControlName="usersInEtatCompte" name="UsersInEtatCompte" [(ngModel)]="addusersRequest.usersInEtatCompte" required="">
+                      <option value="1">Marche</option>
+                      <option value="2">Arret</option>                                 
+                  </select>
+                
+                </div>
+                
+            </div>
+
+            <div class="mb-3">
+              <button class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3" type="submit">Valider</button>
+              <button class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button" (click)="Nouveau()">Nouveau</button>
+                       
+            </div>
+            
+        </form>
+
+        <!--<div class="col-12">
+            <div *ngIf="afficheralertmessage" class="mt-5 flex items-center justify-between p-5 leading-normal text-red-600 bg-red-100 rounded-lg" role="alert">
+                <p>Error alert</p>
+            
+                <svg onclick="return this.parentNode.remove();" class="inline w-4 h-4 fill-current ml-2 hover:opacity-80 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464zM359.5 133.7c-10.11-8.578-25.28-7.297-33.83 2.828L256 218.8L186.3 136.5C177.8 126.4 162.6 125.1 152.5 133.7C142.4 142.2 141.1 157.4 149.7 167.5L224.6 256l-74.88 88.5c-8.562 10.11-7.297 25.27 2.828 33.83C157 382.1 162.5 384 167.1 384c6.812 0 13.59-2.891 18.34-8.5L256 293.2l69.67 82.34C330.4 381.1 337.2 384 344 384c5.469 0 10.98-1.859 15.48-5.672c10.12-8.562 11.39-23.72 2.828-33.83L287.4 256l74.88-88.5C370.9 157.4 369.6 142.2 359.5 133.7z"/>
+                </svg>
+              </div>
+            
+              <div *ngIf="affichersuccesmessage" class="mt-5 flex items-center justify-between p-5 leading-normal text-green-600 bg-green-100 rounded-lg" role="alert">
+                <p>Success alert</p>
+            
+                <svg onclick="return this.parentNode.remove();" class="inline w-4 h-4 fill-current ml-2 hover:opacity-80 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464zM359.5 133.7c-10.11-8.578-25.28-7.297-33.83 2.828L256 218.8L186.3 136.5C177.8 126.4 162.6 125.1 152.5 133.7C142.4 142.2 141.1 157.4 149.7 167.5L224.6 256l-74.88 88.5c-8.562 10.11-7.297 25.27 2.828 33.83C157 382.1 162.5 384 167.1 384c6.812 0 13.59-2.891 18.34-8.5L256 293.2l69.67 82.34C330.4 381.1 337.2 384 344 384c5.469 0 10.98-1.859 15.48-5.672c10.12-8.562 11.39-23.72 2.828-33.83L287.4 256l74.88-88.5C370.9 157.4 369.6 142.2 359.5 133.7z"/>
+                </svg>
+              </div>
+
+        </div>-->
+
+    </div>
+
+    
+
+</div>
+
+    </div>
+
+  </section>
+
+
+ 

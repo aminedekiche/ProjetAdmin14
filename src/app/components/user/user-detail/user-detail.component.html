@@ -1,0 +1,128 @@
+<div mat-dialog-title>Ajouter Utilisateur</div>
+
+<div mat-dialog-content>
+    <form  [formGroup]="registerForm">
+    
+      <div class="row">
+
+        <div class="col-6">
+          <mat-form-field>
+            <mat-label>Utilisateur</mat-label>
+            <input matInput  formControlName="usersPkId" class="form-control"  placeholder="Nom utilisateur" required>
+                        
+            
+          </mat-form-field>
+    
+          <mat-form-field>
+    
+            <mat-label>mot de passe</mat-label>
+            <input matInput formControlName="usersStPassword"   placeholder="mot de passe" required>
+    
+          </mat-form-field>
+    
+          <mat-form-field>
+    
+            <mat-label>wilaya</mat-label>
+            
+            <mat-select formControlName="usersStStructure"    placeholder="wilaya">
+               
+                @for (wil of wilayas; track wil) {
+                  <mat-option [value]="wil.wilayaStLibelleFr">{{(wil.wilayaStLibelleFr)}}</mat-option>
+                }
+                <!--<mat-option [value]="'Alger'">Alger</mat-option>-->
+            </mat-select>
+    
+          </mat-form-field>
+    
+          <!--<mat-form-field>
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker ></mat-datepicker>
+          </mat-form-field>-->
+    
+          <mat-form-field>
+    
+            <mat-label>Fonction</mat-label>
+            <input matInput class="form-control" formControlName="usersStFonction"   placeholder="Fonction" required>
+    
+          </mat-form-field>
+    
+          
+          <label id="example-radio-group-label">Etat compte</label>
+          <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            layout="row"
+            class="example-radio-group" formControlName="usersInEtatCompte"  required>
+                <mat-radio-button value="1">Marche</mat-radio-button>
+                <mat-radio-button value="0">Arret</mat-radio-button>
+          </mat-radio-group>
+
+        </div>
+
+        <div class="col-6">
+              <mat-form-field>
+            <div>
+              <mat-toolbar>
+                <input matInput [value]="'Select Images'" />
+          
+                <button
+                  mat-flat-button
+                  color="primary"
+                  [disabled]="!selectedFiles"
+                  (click)="uploadFiles()">
+                  Upload
+                </button>
+              </mat-toolbar>
+          
+              <input
+                type="file"
+                id="fileInput"
+                name="fileInput"
+                accept="image/*" 
+                (change)="selectFiles($event)"
+              />
+              <!--multiple-->
+              <!--<div>
+                <img [src]= "imageUrl + selectedFileNames" class="preview">
+              </div>-->
+        
+              <div>
+                <img [src]="previews" class="preview">
+              </div>
+            </div>
+
+            <!--<div class="col-md-4">
+              <span class="upload" *ngIf="progress > 0">
+                {{progress}}%
+              </span>
+              <span class="upload" *ngIf="message">
+                {{message}}
+              </span>
+            </div>-->
+              </mat-form-field>    
+
+        </div>
+
+      </div>
+      
+      
+
+          
+
+    </form>
+
+</div>
+
+<div mat-dialog-actions [align]="'end'">
+
+    <button mat-raised-button color="warn" mat-dialog-close>close</button>
+    <button mat-raised-button (click)="addUsers()" >{{actionBtn}}</button>
+
+
+</div>
+
+<!--<ng-toast />  
+<ng-toast [width]="400" />
+ <ng-toasty [width]="400" [position]="ToasterPosition.TOP_RIGHT"></ng-toasty>-->

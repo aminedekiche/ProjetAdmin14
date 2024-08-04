@@ -1,0 +1,65 @@
+
+
+<div class="container"  id="print-section">
+ 
+     <div class="p-4" style="border-style: solid;border-width: 1px;">
+         <p style="line-height:5px; font-size:32px; font-weight:500; text-align:center;font-family: Times New Roman;">
+             Fabrication pièces Industrielles et Tournage Z.L
+         </p>       
+      
+     </div>
+     <br />
+     <div class="row">
+     <div class="col-12">
+     <p style="line-height:5px; font-size:22px; font-weight:500;text-align:center; font-family: Times New Roman;">
+         Liste des travaux de la periode : du <span>{{datedebut}}</span> au <span>{{datefin}}</span>
+     </p>
+     </div>
+     </div>
+     <br />
+     <div class="row">  
+
+        <div class="col-12">
+        
+            <table id="UsersTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style=" font-size: 12pt;border:solid 1px; font-family: 'Times New Roman'; width:5%">
+                                        User
+                                    </th>
+                                    <th style=" font-size: 12pt;border:solid 1px; font-family: 'Times New Roman'; width:5%">
+                                        passe
+                                    </th>
+                                    <th style=" font-size: 12pt;border:solid 1px; font-family: 'Times New Roman'; width:15%">
+                                        structure
+                                    </th>
+                                    <th style=" font-size: 12pt;border:solid 1px; font-family: 'Times New Roman'; width:25%">
+                                        fonction
+                                    </th>
+                                    <th style=" font-size: 12pt;border:solid 1px; font-family: 'Times New Roman'; width:10%">
+                                        Etat
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="tr-bordered" *ngFor = "let user of users; let i =index">
+                                    <td>{{user.usersPkId}}</td>
+                                    <td>{{user.usersStPassword}}</td>
+                                    <td>{{user.usersStStructure}}</td>
+                                    <td>{{user.usersStFonction}}</td>
+                                    <!--<td>{{users.salary}}</td> -->
+                                    <td>                                    
+                                        <label *ngIf="(user.usersInEtatCompte)==0">Arret</label>
+                                        <label *ngIf="(user.usersInEtatCompte)==1">Marche</label>
+                                    
+                                    </td>
+                                </tr>
+                              </tbody>
+            </table>
+
+            <p>Total <span>{{users.length}}</span></p>
+        </div>
+    </div>
+</div>
+
+<!--<button id="print" printTitle="report" printSectionId="print-section" ngxPrint>print 2</button> -->
